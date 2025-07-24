@@ -1,0 +1,260 @@
+{
+	"name": "Nexora - Lead Capture + Telegram Notifier",
+	"nodes": [
+		{
+			"parameters": {
+				"httpMethod": "POST",
+				"path": "a9d10a7b-7872-4735-b599-78eb49dbddc2",
+				"options": {}
+			},
+			"type": "n8n-nodes-base.webhook",
+			"typeVersion": 2,
+			"position": [
+				0,
+				0
+			],
+			"id": "e552d984-44bd-4f33-8f8a-5968d49b7f44",
+			"name": "Catch Lead Submission",
+			"webhookId": "a9d10a7b-7872-4735-b599-78eb49dbddc2"
+		},
+		{
+			"parameters": {
+				"assignments": {
+					"assignments": [
+						{
+							"id": "d012ccc8-1e69-4a82-8584-249a3b09dc3d",
+							"name": "={{ $json.body.data.fields[0].label }}",
+							"value": "={{ $json.body.data.fields[0].value }}",
+							"type": "string"
+						},
+						{
+							"id": "c98145ab-30f3-44e4-8927-ed69e7390979",
+							"name": "={{ $json.body.data.fields[1].label }}",
+							"value": "={{ $json.body.data.fields[1].value }}",
+							"type": "string"
+						},
+						{
+							"id": "6607c87b-bc1b-4eea-aa2f-11c76640e1d5",
+							"name": "={{ $json.body.data.fields[2].label }}",
+							"value": "={{ $json.body.data.fields[2].value }}",
+							"type": "string"
+						},
+						{
+							"id": "48b6107a-bb96-4396-89e9-e7d906a39da7",
+							"name": "={{ $json.body.data.fields[3].label }}",
+							"value": "={{ $json.body.data.fields[3].value }}",
+							"type": "string"
+						},
+						{
+							"id": "5adf390b-8418-405d-a175-326a26405a08",
+							"name": "Submitted At",
+							"value": "={{ new Date().toLocaleString(\"en-IN\", { timeZone: \"Asia/Kolkata\" }) }}",
+							"type": "string"
+						}
+					]
+				},
+				"options": {}
+			},
+			"type": "n8n-nodes-base.set",
+			"typeVersion": 3.4,
+			"position": [
+				208,
+				0
+			],
+			"id": "0d43e537-bac2-4765-b1a5-5003bf07d562",
+			"name": "Edit Fields"
+		},
+		{
+			"parameters": {
+				"operation": "append",
+				"documentId": {
+					"__rl": true,
+					"value": "YOUR_SPREADSHEET_ID",
+					"mode": "list",
+					"cachedResultName": "YOUR_SHEET_NAME",
+					"cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_SPREADSHEET_ID"
+				},
+				"sheetName": {
+					"__rl": true,
+					"value": "gid=0",
+					"mode": "list",
+					"cachedResultName": "YOUR_SHEET_GID",
+					"cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_SPREADSHEET_ID"
+				},
+				"columns": {
+					"mappingMode": "defineBelow",
+					"value": {
+						"What's Your Name?": "={{ $json[\"What's Your Name?\"] }}",
+						"Enter Email Address": "={{ $json[\"Enter Email Address\"] }}",
+						"What kind of SaaS or AI tool are you looking for?": "={{ $json[\"What kind of SaaS or AI tool are you looking for?\"] }}",
+						"Your Phone Number?": "={{ $json[\"Your Phone Number?\"] }}",
+						"Submitted at": "={{ $json[\"Submitted At\"] }}"
+					},
+					"matchingColumns": [],
+					"schema": [
+						{
+							"id": "Submission ID",
+							"displayName": "Submission ID",
+							"required": false,
+							"defaultMatch": false,
+							"display": true,
+							"type": "string",
+							"canBeUsedToMatch": true,
+							"removed": true
+						},
+						{
+							"id": "Respondent ID",
+							"displayName": "Respondent ID",
+							"required": false,
+							"defaultMatch": false,
+							"display": true,
+							"type": "string",
+							"canBeUsedToMatch": true,
+							"removed": true
+						},
+						{
+							"id": "Submitted at",
+							"displayName": "Submitted at",
+							"required": false,
+							"defaultMatch": false,
+							"display": true,
+							"type": "string",
+							"canBeUsedToMatch": true,
+							"removed": false
+						},
+						{
+							"id": "What's Your Name?",
+							"displayName": "What's Your Name?",
+							"required": false,
+							"defaultMatch": false,
+							"display": true,
+							"type": "string",
+							"canBeUsedToMatch": true,
+							"removed": false
+						},
+						{
+							"id": "Your Phone Number?",
+							"displayName": "Your Phone Number?",
+							"required": false,
+							"defaultMatch": false,
+							"display": true,
+							"type": "string",
+							"canBeUsedToMatch": true,
+							"removed": false
+						},
+						{
+							"id": "Enter Email Address",
+							"displayName": "Enter Email Address",
+							"required": false,
+							"defaultMatch": false,
+							"display": true,
+							"type": "string",
+							"canBeUsedToMatch": true
+						},
+						{
+							"id": "What kind of SaaS or AI tool are you looking for?",
+							"displayName": "What kind of SaaS or AI tool are you looking for?",
+							"required": false,
+							"defaultMatch": false,
+							"display": true,
+							"type": "string",
+							"canBeUsedToMatch": true
+						}
+					],
+					"attemptToConvertTypes": false,
+					"convertFieldsToString": false
+				},
+				"options": {}
+			},
+			"type": "n8n-nodes-base.googleSheets",
+			"typeVersion": 4.6,
+			"position": [
+				416,
+				0
+			],
+			"id": "a1e68889-300a-47cf-ae83-c9557272b486",
+			"name": "Append row in sheet",
+			"credentials": {
+				"googleSheetsOAuth2Api": {
+					"id": "MYCRs1DI2HIniXtc",
+					"name": "Google Sheets account"
+				}
+			}
+		},
+		{
+			"parameters": {
+				"method": "POST",
+				"url": "https://api.telegram.org/bot<YOUR_BOT_TOKEN>/sendMessage",
+				"sendBody": true,
+				"bodyParameters": {
+					"parameters": [
+						{
+							"name": "chat_id",
+							"value": "YOUR_CHAT_ID"
+						},
+						{
+							"name": "text",
+							"value": "=🚀 New Lead Alert!\n👤 Name: {{ $json[\"What's Your Name?\"] }}\n📧 Email: {{ $json[\"Enter Email Address\"] }}\n📱 Phone: {{ $json[\"Your Phone Number?\"] }}\n🧠 Tool Requested: {{ $json[\"What kind of SaaS or AI tool are you looking for?\"] }}\n🕒 Submitted At: {{ new Date().toLocaleString(\"en-IN\", { timeZone: \"Asia/Kolkata\" }) }}\n📍 Source: SAMARS Lead Form"
+						}
+					]
+				},
+				"options": {}
+			},
+			"type": "n8n-nodes-base.httpRequest",
+			"typeVersion": 4.2,
+			"position": [
+				624,
+				0
+			],
+			"id": "8fed2a65-99f2-42a1-b8d9-df6bd0b09663",
+			"name": "HTTP Request"
+		}
+	],
+	"pinData": {},
+	"connections": {
+		"Catch Lead Submission": {
+			"main": [
+				[
+					{
+						"node": "Edit Fields",
+						"type": "main",
+						"index": 0
+					}
+				]
+			]
+		},
+		"Edit Fields": {
+			"main": [
+				[
+					{
+						"node": "Append row in sheet",
+						"type": "main",
+						"index": 0
+					}
+				]
+			]
+		},
+		"Append row in sheet": {
+			"main": [
+				[
+					{
+						"node": "HTTP Request",
+						"type": "main",
+						"index": 0
+					}
+				]
+			]
+		}
+	},
+	"active": true,
+	"settings": {
+		"executionOrder": "v1"
+	},
+	"versionId": "1f45cb16-47eb-44eb-bb5d-2ff6bc272bc6",
+	"meta": {
+		"templateCredsSetupCompleted": true,
+		"instanceId": "9aec03e09e51ff71da61b3a25eb9c3727fcdc055f2f000a40cb5e8c9b834dfe2"
+	},
+	"id": "AFeWK6zOclhbtGDS",
+	"tags": []
+}

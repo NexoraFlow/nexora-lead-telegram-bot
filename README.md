@@ -31,5 +31,6 @@ This automation instantly captures leads from a Tally form, saves them in Google
 | `Nexora - Lead Capture + Telegram Notifier.json` | Main workflow |
 | `README.md` | Setup instructions and overview |
 ---
+🎁 [Download the Telegram Lead Bot](https://nexoraflow.gumroad.com/l/telegram-lead-bot)
 ## 🔐 License
 Use freely. Attribution to **Nexora** is appreciated.

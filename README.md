@@ -16,9 +16,10 @@ This automation instantly captures leads from a Tally form, saves them in Google
 ## ⚙️ Setup Instructions
 1. Import the `Nexora - Lead Capture + Telegram Notifier.json` into your n8n
 2. Replace the placeholders:
-   - `YOUR_SPREADSHEET_ID` with your Sheet ID
+   - `YOUR_SPREADSHEET_ID` with the ID from your Google Sheet URL  Example: If your URL is https://docs.google.com/spreadsheets/d/1ABCD123456789XYZ/edit#gid=0,  
    - `YOUR_CHAT_ID` with your Telegram user/group ID
-   - `YOUR_BOT_TOKEN` with your bot token from @BotFather
+   - `YOUR_BOT_TOKEN` from @BotFather (Telegram bot)
+   - `YOUR_SHEET_GID` is usually just gid=0 (default first sheet). You can keep it as gid=0 unless you're using a renamed or different sheet tab.
 3. Activate the workflow — done!
 ---
 ## 🔁 Workflow Diagram

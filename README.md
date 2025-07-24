@@ -21,6 +21,8 @@ This automation instantly captures leads from a Tally form, saves them in Google
    - `YOUR_BOT_TOKEN` with your bot token from @BotFather
 3. Activate the workflow — done!
 ---
+## 🔁 Workflow Diagram
+![N8N Workflow](https://github.com/NexoraFlow/nexora-lead-telegram-bot/raw/main/workflow-diagram.JPG)
 ## 📂 Files Included
 | File Name | Purpose |
 |-----------|---------|
